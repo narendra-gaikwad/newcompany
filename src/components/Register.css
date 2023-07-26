@@ -1,0 +1,165 @@
+/* Main container for the multi-step form */
+.step-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* background-color: #f9f9f9; */
+    background-color: hsla(0, 0%, 98%, 0.719);
+    /* background-color: #f0a8a8; */
+    margin-bottom: 80px;
+            margin-top: 25px;
+            padding-top: 5px;
+}
+
+
+/* Progress bar container */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #ddd;
+   
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    /* padding-right:auto; */
+    box-sizing: border-box;
+}
+/* Form input fields
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-right: 4px;
+
+} */
+.form-heading {
+    text-align: center;
+    margin-top: 40px;
+   
+    margin-bottom: 34px;
+}
+
+.form-heading h1 {
+    font-size: 24px;
+    color: #333;
+        margin-bottom: 10px;
+    margin: 0;
+}
+
+
+/* Style the dropdown arrow for modern browsers */
+select::after {
+    content: "\25BC";
+    /* Unicode code for down arrow ▼ */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* Progress bar (filled portion) */
+.progress {
+    height: 100%;
+    background-color: #4caf50;
+    border-radius: 4px;
+}
+
+/* Each step container */
+.step {
+    display: none;
+}
+
+/* Show the current step */
+.step:nth-child(2n) {
+    display: block;
+}
+
+
+
+/* Buttons container */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    align-items: center;
+}
+
+/* Previous and Next buttons */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Next button color when form is complete */
+button:last-child {
+    background-color: #007bff;
+    margin-left: auto;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    /* Add more custom styles as needed */
+}
+
+/* Style the dropdown arrow */
+select::-ms-expand {
+    display: none;
+    /* Remove default arrow in IE 10 and 11 */
+}
+
+select::after {
+    content: "\25BC";
+    /* Unicode code for down arrow ▼ */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+/* CSS for the custom date picker input container */
+.date-picker-input {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Set the desired width for the date picker input container */
+}
+
+/* CSS for the icon */
+.date-picker-icon {
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Hide the default arrow icon in the date picker input */
+.react-datepicker__input-container input {
+    padding-right: 200px;
+    /* Adjust the padding to make space for the icon */
+}
+
+/* .login-link{
+    margin-bottom: 10px;
+} */
+
