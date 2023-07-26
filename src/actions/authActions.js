@@ -6,6 +6,7 @@ export const registerUser = (email, password) => async (dispatch) => {
     await firebaseApp.auth().createUserWithEmailAndPassword(email, password); // Use firebaseApp here
     const user = firebaseApp.auth().currentUser; // Use firebaseApp here
     dispatch(userLoggedIn(user));
+    console.log(user);
   } catch (error) {
     dispatch(authError(error.message));
   }

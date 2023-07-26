@@ -1,31 +1,32 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ProgressBar from "./ProgressBar";
 import Step from "./Step";
 import "../components/Register.css";
-import { FaCalendarAlt } from "react-icons/fa";
-import CustomDatePickerInput from "../components/CustomDatePickerInput ";
+// import { FaCalendarAlt } from "react-icons/fa";
+// import CustomDatePickerInput from "../components/CustomDatePickerInput ";
 import { updateFormData } from "../reducers/formSlice";
-import { Link, useNavigate } from "react-router-dom";
-import { firebaseApp, firestore } from "../firebase";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
+// import { ref } from "firebase";
 import "../components/Register.css";
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 const Register = () => {
   const [currentStep, setCurrentStep] = useState(3);
   const totalSteps = 3;
-  const datePickerRef = useRef(null);
+  // const datePickerRef = useRef(null);
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.form);
   const navigate = useNavigate();
   if (!formData) {
     return null;
   }
-  const handleDateIconClick = () => {
-    datePickerRef.current.setOpen(true);
-    console.log("click");
-  };
+  // const handleDateIconClick = () => {
+  //   datePickerRef.current.setOpen(true);
+  // };
 
   const handleNext = () => {
     setCurrentStep((prevStep) => Math.min(prevStep + 1, totalSteps));
@@ -41,24 +42,16 @@ const Register = () => {
   // };
   const handleFormChange = (step, field, value) => {
     dispatch(updateFormData({ step: step, field: field, value: value }));
-    console.log("Updated Form Data:", formData);
   };
   const handleGoToLogin = () => {
     navigate("/login");
   };
 
-  const handleSubmit = () => {
-    firebaseApp
-      .firestore()
-      .collection("users")
-      .add(formData)
-      .then((docRef) => {
-        console.log("Form submitted with ID:", docRef.id);
-        navigate("/dashboard");
-      })
-      .catch((error) => {
-        console.error("Error submitting form:", error);
-      });
+  const handleSubmit = async () => {
+    const userCreadential = await createUserWithEmailAndPassword(auth, formData.step3.mailId, formData.step3.password);
+    const user = userCreadential.user;
+    console.log(user);
+    navigate("/");
   };
 
   const renderFormStep = (stepNumber) => {
@@ -317,9 +310,6 @@ const Register = () => {
 
   return (
     <div className="container">
-      {/* <div className="form-heading">
-        <h1>Registration Form</h1>
-      </div> */}
       <div className="step-form">
         <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
 

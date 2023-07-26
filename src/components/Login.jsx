@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../actions/authActions";
-import { Link, useNavigate } from "react-router-dom";
-import { firebaseApp } from "../firebase";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "firebase/auth";
 import "../components/login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const error = useSelector((state) => state.auth.error);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      await firebaseApp.auth().signInWithEmailAndPassword(email, password);
+      const userCreatdential = await signInWithEmailAndPassword(auth,email, password);
+      const user = userCreatdential.user;
+      console.log(user);
       navigate("/dashboard");
     } catch (error) {
       console.error("Login Error:", error);
