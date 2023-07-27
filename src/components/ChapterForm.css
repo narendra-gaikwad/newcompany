@@ -1,0 +1,102 @@
+/* ChapterForm.css */
+
+.chapter-form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.chapter-form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.chapter-form h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.chapter-form h5 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    flex: 1;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    flex: 2;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-video-btn {
+    margin-left: 10px;
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-video-btn:hover {
+    background-color: #27ae60;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group textarea::placeholder {
+    color: #888;
+}
+
+button[type="submit"] {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+/* Additional style to handle the "ADD VIDEO" button */
+
+.chapter-form button {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.chapter-form button:hover {
+    background-color: #27ae60;
+}
+
