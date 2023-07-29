@@ -1,13 +1,53 @@
+
 import React, { useState } from "react";
+import { storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import "firebase/auth";
+import { auth } from "../firebase"; 
 
 const AdditionalChapterForm = ({ onSubmit }) => {
+  const { user } = auth(); 
+
   const [chapterName, setChapterName] = useState("");
   const [description, setDescription] = useState("");
+  const [videoFile, setVideoFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Pass the form data to the parent component using the onSubmit callback
-    onSubmit(chapterName, description);
+    if (videoFile == null) return;
+
+    const userID = user ? user.uid : null; 
+
+    // Generate a unique name for the video file using v4() from uuid
+    const videoFileName = videoFile.name + v4();
+
+    // Upload the video file to Firebase Storage
+    const videoRef = ref(storage, `videos/${videoFileName}`);
+    const uploadTask = uploadBytesResumable(videoRef, videoFile);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        // Handle progress updates
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      (error) => {
+        // Handle errors during upload if needed
+        console.error("Error uploading video:", error);
+      },
+      async () => {
+        // Upload completed successfully
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+        // Pass the form data to the parent component using the onSubmit callback
+        onSubmit(chapterName, description, downloadURL);
+        setUploadProgress(0); // Reset the upload progress
+      }
+    );
   };
 
   return (
@@ -29,6 +69,23 @@ const AdditionalChapterForm = ({ onSubmit }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
+      <div className="form-group">
+        <label htmlFor="videoFile">Upload Video:</label>
+        <input
+          type="file"
+          id="videoFile"
+          accept="video/*"
+          onChange={(e) => setVideoFile(e.target.files[0])}
+        />
+      </div>
+      {uploadProgress > 0 && (
+        <div className="progress-bar">
+          <div
+            className="progress"
+            style={{ width: `${uploadProgress}%` }}
+          ></div>
+        </div>
+      )}
       <button type="submit">Submit</button>
     </form>
   );

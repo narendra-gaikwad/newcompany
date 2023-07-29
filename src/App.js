@@ -1,25 +1,3 @@
-// import React from "react";
-// import { Provider } from "react-redux";
-// import Register from "./components/Register";
-// import rootReducer from "./reducers/rootReducer";
-// import { configureStore } from "@reduxjs/toolkit";
-// import "../src/components/Register.css";
-
-// const store = configureStore({
-//   reducer: rootReducer,
-// });
-
-// const App = () => {
-//   return (
-//     <Provider store={store}>
-//       <div>
-//         <Register />
-//       </div>
-//     </Provider>
-//   );
-// };
-
-// export default App;
 import React from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

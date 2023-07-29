@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import "../components/dashboard.css"; // Import the CSS file you created
+import "../components/dashboard.css";
 import dashboardImage from "../assets/imageDash.png";
 import ChapterForm from "./ChapterForm";
 
@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [showClassButtons, setShowClassButtons] = useState(false);
   const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedSubject, setSelectedSubject] = useState(null); // Add selectedSubject state
+  const [selectedSubject, setSelectedSubject] = useState(null); 
   const [showScreen2, setShowScreen2] = useState(false);
   const [showScreen3, setShowScreen3] = useState(false);
   const [showChapterForm, setShowChapterForm] = useState(false);
