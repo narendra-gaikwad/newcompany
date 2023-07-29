@@ -96,6 +96,8 @@ const ChapterForm = ({ selectedClass, selectedSubject, onCloseForm }) => {
               controls
               src={chapter.videoURL}
               className="small-video"
+              height={500}
+              width={500}
             ></video>
           )}
         </div>
