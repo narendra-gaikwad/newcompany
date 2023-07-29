@@ -55,7 +55,7 @@ const AdditionalChapterForm = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
-        <label htmlFor="chapterName">Chapter Name:</label>
+        <label htmlFor="chapterName">Teacher Name:</label>
         <input
           type="text"
           id="chapterName"

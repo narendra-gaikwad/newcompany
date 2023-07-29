@@ -21,7 +21,12 @@ const ChapterForm = ({ selectedClass, selectedSubject, onCloseForm }) => {
         const data = doc.data();
 
         if (data.userID === (user ? user.uid : null)) {
-          chaptersData.push({ id: doc.id, ...data });
+          if (
+            data.class === selectedClass &&
+            data.subject === selectedSubject
+          ) {
+            chaptersData.push({ id: doc.id, ...data });
+          }
         }
       });
       setSubmittedChapters(chaptersData);
@@ -30,7 +35,7 @@ const ChapterForm = ({ selectedClass, selectedSubject, onCloseForm }) => {
     return () => {
       unsubscribe();
     };
-  }, [user]);
+  }, [user, selectedClass, selectedSubject]);
 
   const handleAdditionalFormSubmit = async (
     chapterName,
@@ -40,7 +45,14 @@ const ChapterForm = ({ selectedClass, selectedSubject, onCloseForm }) => {
   ) => {
     setSubmittedChapters([
       ...submittedChapters,
-      { name: chapterName, description, videoURL, userID },
+      {
+        name: chapterName,
+        description,
+        videoURL,
+        userID,
+        class: selectedClass,
+        subject: selectedSubject,
+      },
     ]);
 
     try {
@@ -50,6 +62,8 @@ const ChapterForm = ({ selectedClass, selectedSubject, onCloseForm }) => {
         description,
         videoURL,
         userID,
+        class: selectedClass,
+        subject: selectedSubject,
       });
 
       setShowAdditionalForm(false);
@@ -74,7 +88,8 @@ const ChapterForm = ({ selectedClass, selectedSubject, onCloseForm }) => {
 
       {submittedChapters.map((chapter, index) => (
         <div key={index} className="form-data">
-          <h3>Name: {chapter.name}</h3>
+          <h1>Previous Chapters</h1>
+          <h3>Teacher Name: {chapter.name}</h3>
           <p>Description: {chapter.description}</p>
           {chapter.videoURL && (
             <video
