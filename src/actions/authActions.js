@@ -1,4 +1,4 @@
-import { firebaseApp } from "../firebase";
+import { firebaseApp } from "../firebase"; // Import firebaseApp using curly braces {}
 import { userLoggedIn, userLoggedOut, authError } from "../reducers/authSlice";
 
 export const registerUser = (email, password) => async (dispatch) => {
