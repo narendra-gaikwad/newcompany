@@ -1,4 +1,4 @@
-// components/Step.js
+
 import React from "react";
 
 const Step = ({ isVisible, children }) => {

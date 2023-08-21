@@ -1,4 +1,4 @@
-/* login.css */
+
 
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -8,13 +8,12 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #eecccc;
+    background-color: #71f09b;
 }
 
 .container-login {
     width: 300px;
     padding: 20px;
-    /* background-color: #f0a8a8; */
     background-color: hsla(0, 0%, 98%, 0.719);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(14, 12, 12, 0.1);
@@ -86,4 +85,4 @@ body {
     color: #333;
     margin: 0;
 }
-/* Additional styles can be added for logo, background images, etc. */
+

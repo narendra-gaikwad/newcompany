@@ -1,5 +1,4 @@
-/* ChapterForm.css */
-
+/* 
 .chapter-form {
     padding: 20px;
     border: 1px solid #ccc;
@@ -7,6 +6,8 @@
     background-color: #f9f9f9;
     max-width: 400px;
     margin: 20px auto;
+    padding-left: 211px;
+     padding-right: 219px;
 }
 
 .chapter-form h2 {
@@ -37,22 +38,23 @@
 
 .form-data {
   max-width: 300px;
-  /* Adjust the maximum width as needed */
+  
   margin: auto;
-  /* Center the video horizontally */
+
 }
 
 .video {
   width: 100%;
   height: auto;
-  /* Maintain the video's aspect ratio */
+
 }
 
+
 .small-video {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  /* Set the height to your desired value for the default small size */
+
+  max-width: 30px;
+  height: 50px;
+
 }
 .form-group label {
     flex: 1;
@@ -112,7 +114,7 @@ button[type="submit"]:hover {
     background-color: #2980b9;
 }
 
-/* Additional style to handle the "ADD VIDEO" button */
+
 
 .chapter-form button {
     background-color: #2ecc71;
@@ -128,3 +130,94 @@ button[type="submit"]:hover {
     background-color: #27ae60;
 }
 
+
+.chapter-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chapter {
+  width: 300px;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+ */
+
+
+ /* Reset default margin and padding for all elements */
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.chapter-form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    max-width: 800px;
+    margin: 20px auto;
+    text-align: center;
+    position: relative;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+.add-video-button {
+    margin-left: 10px;
+}
+
+.video-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Distribute videos evenly in rows */
+    gap: 50px;
+    /* Adjust the gap between videos */
+}
+
+.video-cell {
+    width: calc(33.33% - 20px);
+    /* Distribute videos in 3 columns with gap */
+    margin-bottom: 20px;
+}
+
+.video-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    position: relative;
+    margin: 10px;
+}
+
+.small-video {
+    max-width: 100%;
+    height: auto;
+}
+
+.video-info {
+    padding: 10px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.video-container:hover .video-info {
+    opacity: 1;
+}

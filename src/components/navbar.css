@@ -1,0 +1,33 @@
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 190vh;
+    height: 100%;
+
+    background-color: #41badf;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.user-info button {
+    background-color: #dd4f4f;
+    color: #fff;
+    border: none;
+    padding: 12px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 14px;
+    margin-right: 35px;
+}
+
+.user-info button:hover {
+    background-color: #ff0000;
+}

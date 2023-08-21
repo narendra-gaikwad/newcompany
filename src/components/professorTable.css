@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background-color: #333;
+    height: 100vh;
+    width: 200px;
+    padding: 20px;
+}
+
+.menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.submenu {
+    display: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+}
+
+.menu-item:hover .submenu {
+    display: block;
+}
+
+.submenu li {
+    color: #ccc;
+    padding: 5px 0;
+}
+
+.submenu li:hover {
+    color: #fff;
+}

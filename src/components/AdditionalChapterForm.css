@@ -1,0 +1,60 @@
+/* AdditionalChapterForm.css */
+
+.additional-chapter-form-card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.form-control-file {
+    display: inline-block;
+    width: auto;
+    margin-top: 0.5rem;
+}
+
+.progress-bar {
+    margin-top: 0.5rem;
+    background-color: #f0f0f0;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #28a745;
+    width: 0;
+    transition: width 0.3s;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.cancel-button {
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

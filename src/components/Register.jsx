@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 // import { ref } from "firebase";
 import "../components/Register.css";
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Register = () => {
   const [currentStep, setCurrentStep] = useState(3);
@@ -48,7 +48,11 @@ const Register = () => {
   };
 
   const handleSubmit = async () => {
-    const userCreadential = await createUserWithEmailAndPassword(auth, formData.step3.mailId, formData.step3.password);
+    const userCreadential = await createUserWithEmailAndPassword(
+      auth,
+      formData.step3.mailId,
+      formData.step3.password
+    );
     const user = userCreadential.user;
     console.log(user);
     navigate("/");

@@ -15,7 +15,11 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const userCreatdential = await signInWithEmailAndPassword(auth,email, password);
+      const userCreatdential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCreatdential.user;
       console.log(user);
       navigate("/dashboard");
