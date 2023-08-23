@@ -1,4 +1,68 @@
-/* AdditionalChapterForm.css */
+/* 
+.additional-chapter-form-card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.form-control-file {
+    display: inline-block;
+    width: auto;
+    margin-top: 0.5rem;
+}
+
+.progress-bar-addc {
+    margin-top: 0.5rem;
+    background-color: #f0f0f0;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar-addc {
+    margin-top: 0.5rem;
+    background-color: #f0f0f0;
+    height: 20px;
+ 
+    border-radius: 10px;
+   
+    overflow: hidden;
+}
+
+.progress-addc {
+    height: 100%;
+    background-color: #28a745;
+    width: 0;
+    transition: width 0.3s;
+    border-radius: 10px;
+   /
+}
+
+.cancel-button {
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+} */
+
 
 .additional-chapter-form-card {
     border: none;
@@ -19,7 +83,7 @@
     margin-top: 0.5rem;
 }
 
-.progress-bar {
+.progress-bar-addc {
     margin-top: 0.5rem;
     background-color: #f0f0f0;
     height: 10px;
@@ -27,34 +91,71 @@
     overflow: hidden;
 }
 
-.progress {
+.progress-bar-addc {
+    margin-top: 0.5rem;
+    background-color: #f0f0f0;
+    height: 20px;
+
+    border-radius: 10px;
+  
+    overflow: hidden;
+}
+
+.progress-addc {
     height: 100%;
     background-color: #28a745;
     width: 0;
     transition: width 0.3s;
+    border-radius: 10px;
+  
 }
-
-.button-container {
+.custom-button-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
 }
-
-.cancel-button {
+.button-center-container {
+    display: flex;
+    justify-content: center;
+   
+    margin-top: 1rem;
+}
+.custom-cancel-button {
     padding: 0.5rem 1rem;
-    background-color: #dc3545;
+    background-color: #d40d21;
+    
+    color: rgb(184, 28, 28);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-submit-button {
+    padding: 0.5rem 1rem;
+    background-color: #7bff00;
+   
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.submit-button {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.progress-container {
+    width: 100%;
+    height: 10px;
+   
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar-container {
+    height: 100%;
+    width: 0;
+    background-color: #28a745;
+    transition: width 0.3s;
+    border-radius: 10px;
 }

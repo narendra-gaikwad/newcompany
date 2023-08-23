@@ -1,353 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { onAuthStateChanged } from "firebase/auth";
-// import { auth } from "../firebase";
-// import "../components/dashboard.css";
-// import dashboardImage from "../assets/imageDash.png";
-// import ChapterForm from "./ChapterForm";
-
-// const Dashboard = () => {
-//   const [userData, setUserData] = useState(null);
-//   const [showClassButtons, setShowClassButtons] = useState(false);
-//   const [selectedClass, setSelectedClass] = useState(null);
-//   const [selectedSubject, setSelectedSubject] = useState(null);
-//   const [showScreen2, setShowScreen2] = useState(false);
-//   const [showScreen3, setShowScreen3] = useState(false);
-//   const [showChapterForm, setShowChapterForm] = useState(false);
-
-//   useEffect(() => {
-//     onAuthStateChanged(auth, (user) => {
-//       if (user) setUserData(user);
-//       else setUserData(null);
-//     });
-//   }, []);
-
-//   const handleSelectClassClick = () => {
-//     setShowClassButtons((prev) => !prev);
-//   };
-
-//   const handleClassButtonClick = (className) => {
-//     setSelectedClass(className);
-//     setShowClassButtons(false);
-//     setShowScreen2(true);
-//   };
-
-//   const handleVideoButtonClick = () => {
-//     setShowScreen2(false);
-//     setShowScreen3(true);
-//   };
-
-//   const handleCloseScreen2 = () => {
-//     setSelectedClass(null);
-//     setShowScreen2(false);
-//     setShowScreen3(false);
-//     setShowChapterForm(false);
-//   };
-
-//   const handleSubjectButtonClick = (subjectName) => {
-//     setSelectedSubject(subjectName);
-//     setShowChapterForm(true);
-//   };
-
-//   const handleCloseChapterForm = () => {
-//     setSelectedSubject(null);
-//     setShowChapterForm(false);
-//   };
-
-//   if (!userData) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div className="container container-dashboard">
-//       <h2>Welcome : {userData.email}</h2>
-//       {/* <img
-//         src={dashboardImage}
-//         alt="Dashboard Background"
-//         className="background-image"
-//       /> */}
-//       <button className="select-class-btn" onClick={handleSelectClassClick}>
-//         SELECT CLASS
-//       </button>
-//       <div className={`class-buttons ${showClassButtons ? "show" : ""}`}>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 1")}
-//         >
-//           CLASS 1
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 2")}
-//         >
-//           CLASS 2
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 3")}
-//         >
-//           CLASS 3
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 4")}
-//         >
-//           CLASS 4
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 5")}
-//         >
-//           CLASS 5
-//         </button>
-//       </div>
-//       {showScreen2 && selectedClass && (
-//         <div className="screen2">
-//           <h2>{selectedClass}:</h2>
-//           <div className="screen2-buttons">
-//             <button className="screen2-btn" onClick={handleVideoButtonClick}>
-//               VIDEO
-//             </button>
-//             <button className="screen2-btn">WEEKLY EXAM</button>
-//             <button className="screen2-btn">SCHOLARSHIP EXAM</button>
-//             <button className="screen2-btn">PDF</button>
-//           </div>
-//           <button className="close-btn" onClick={handleCloseScreen2}>
-//             CLOSE
-//           </button>
-//         </div>
-//       )}
-//       {showScreen3 && (
-//         <div className="screen3">
-//           <h2>Video Subjects Name</h2>
-//           <div className="screen3-buttons">
-//             <button
-//               className="screen3-btn"
-//               onClick={() => handleSubjectButtonClick("SUBJECT 1")}
-//             >
-//               SUBJECT 1
-//             </button>
-//             <button
-//               className="screen3-btn"
-//               onClick={() => handleSubjectButtonClick("SUBJECT 2")}
-//             >
-//               SUBJECT 2
-//             </button>
-//             <button
-//               className="screen3-btn"
-//               onClick={() => handleSubjectButtonClick("SUBJECT 3")}
-//             >
-//               SUBJECT 3
-//             </button>
-//             <button
-//               className="screen3-btn"
-//               onClick={() => handleSubjectButtonClick("SUBJECT 4")}
-//             >
-//               SUBJECT 4
-//             </button>
-//             <button
-//               className="screen3-btn"
-//               onClick={() => handleSubjectButtonClick("SUBJECT 5")}
-//             >
-//               SUBJECT 5
-//             </button>
-//           </div>
-//           <button className="close-btn" onClick={handleCloseScreen2}>
-//             CLOSE
-//           </button>
-//         </div>
-//       )}
-
-//       {showChapterForm && (
-//         <ChapterForm
-//           selectedClass={selectedClass}
-//           selectedSubject={selectedSubject}
-//           onCloseForm={handleCloseChapterForm}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
-// import React, { useEffect, useState } from "react";
-// import { onAuthStateChanged } from "firebase/auth";
-// import { auth } from "../firebase";
-// import "../components/dashboard.css";
-// // import dashboardImage from "../assets/imageDash.png";
-// import ChapterForm from "./ChapterForm";
-// import Navbar from "./Navbar";
-// import LeftSideMenu from "./LeftSideMenu";
-
-// const Dashboard = () => {
-//   const [userData, setUserData] = useState(null);
-//   const [showClassButtons, setShowClassButtons] = useState(false);
-//   const [selectedClass, setSelectedClass] = useState(null);
-//   const [selectedSubject, setSelectedSubject] = useState(null);
-//   const [showScreen3, setShowScreen3] = useState(false);
-//   const [showScreen2, setShowScreen2] = useState(false);
-//   const [showChapterForm, setShowChapterForm] = useState(false);
-
-//   useEffect(() => {
-//     onAuthStateChanged(auth, (user) => {
-//       if (user) setUserData(user);
-//       else setUserData(null);
-//     });
-//   }, []);
-
-//   const handleSelectClassClick = () => {
-//     setShowClassButtons((prev) => !prev);
-//   };
-
-//   const handleClassButtonClick = (className) => {
-//     setSelectedClass(className);
-//     setShowClassButtons(false);
-//     setShowScreen2(true);
-//   };
-
-//   const handleVideoButtonClick = () => {
-//     setShowScreen2(false);
-//     setShowScreen3(true);
-//     setShowChapterForm(true);
-//   };
-
-//   const handleCloseScreen2 = () => {
-//     setSelectedClass(null);
-//     setShowScreen2(false);
-//     setShowScreen3(false);
-//     setShowChapterForm(false);
-//   };
-
-//   const handleSubjectButtonClick = (subjectName) => {
-//     setSelectedSubject(subjectName);
-//     setShowScreen2(false);
-
-//     setShowScreen3(true);
-//   };
-
-//   const handleCloseChapterForm = () => {
-//     setSelectedSubject(null);
-//     setShowChapterForm(false);
-//   };
-
-//   if (!userData) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div className="container container-dashboard">
-//       <Navbar userEmail={userData.email} />
-//       {/* <LeftSideMenu /> */}
-
-//       <h2>Welcome : {userData.email}</h2>
-//       {/* <img
-//         src={dashboardImage}
-//         alt="Dashboard Background"
-//         className="background-image"
-//       /> */}
-//       <button className="select-class-btn" onClick={handleSelectClassClick}>
-//         SELECT CLASS
-//       </button>
-//       <div className={`class-buttons ${showClassButtons ? "show" : ""}`}>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 1")}
-//         >
-//           CLASS 1
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 2")}
-//         >
-//           CLASS 2
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 3")}
-//         >
-//           CLASS 3
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 4")}
-//         >
-//           CLASS 4
-//         </button>
-//         <button
-//           className="dash-btn"
-//           onClick={() => handleClassButtonClick("Class 5")}
-//         >
-//           CLASS 5
-//         </button>
-//       </div>
-
-//       {showScreen2 && (
-//         <div className="screen2">
-//           <h2>Subjects Name</h2>
-//           <div className="screen2-buttons">
-//             <button
-//               className="screen2-btn"
-//               onClick={() => handleSubjectButtonClick("BALBHARTI (MAHARATHI)")}
-//             >
-//               "BALBHARTI (MAHARATHI)"
-//             </button>
-//             <button
-//               className="screen2-btn"
-//               onClick={() => handleSubjectButtonClick("ENGLISH")}
-//             >
-//               ENGLISH
-//             </button>
-//             <button
-//               className="screen2-btn"
-//               onClick={() => handleSubjectButtonClick("KHELU KARU SHIKU")}
-//             >
-//               KHELU KARU SHIKU
-//             </button>
-//             <button
-//               className="screen2-btn"
-//               onClick={() => handleSubjectButtonClick("MATH")}
-//             >
-//               MATH
-//             </button>
-//             <button
-//               className="screen2-btn"
-//               onClick={() => handleSubjectButtonClick("HISTORY")}
-//             >
-//               HISTORY
-//             </button>
-//           </div>
-//           <button className="close-btn" onClick={handleCloseScreen2}>
-//             CLOSE
-//           </button>
-//         </div>
-//       )}
-//       {showScreen3 && selectedClass && (
-//         <div className="screen3">
-//           <h2>{selectedClass}:</h2>
-//           <div className="screen3-buttons">
-//             <button className="screen3-btn" onClick={handleVideoButtonClick}>
-//               VIDEO
-//             </button>
-//             <button className="screen3-btn">WEEKLY EXAM</button>
-//             <button className="screen3-btn">SCHOLARSHIP EXAM</button>
-//             <button className="screen3-btn">PDF</button>
-//           </div>
-//           <button className="close-btn" onClick={handleCloseScreen2}>
-//             CLOSE
-//           </button>
-//         </div>
-//       )}
-//       {showChapterForm && (
-//         <ChapterForm
-//           selectedClass={selectedClass}
-//           selectedSubject={selectedSubject}
-//           onCloseForm={handleCloseChapterForm}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
@@ -358,6 +8,15 @@ import LeftSideMenu from "./LeftSideMenu";
 import { Container, Button, Table, Card, CardHeader, Row } from "reactstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+
+const classSubjectsMap = {
+  "Class 1": ["MATHS", "ENGLISH"],
+  "Class 2": ["HISTORY", "MARATHI", "ENGLISH"],
+  "Class 3": ["HINDI", "MARATHI"],
+  "Class 4": ["ENGLISH", "MATHS", "ENGLISH"],
+  "Class 5": ["MATHS", "MARATHI"],
+  "Class 6": ["MARATHI", "HISTORY,ENGLISH"],
+};
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
@@ -431,12 +90,14 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
+  const isAdmin = userData.email === "admin@gmail.com";
+
   return (
     <>
       {/* <Navbar userEmail={userData.email} /> */}
-      {/* <div className="user-email">
+      <div>
         <h2>Welcome: {userData.email}</h2>
-      </div> */}
+      </div>
       {/* <LeftSideMenu /> */}
       <div>
         <Container className="container container-dashboard">
@@ -523,6 +184,16 @@ const Dashboard = () => {
                         </Button>
                       </td>
                     </tr>
+                    <tr>
+                      <td>
+                        <Button
+                          className="dash-btn"
+                          onClick={() => handleClassButtonClick("Class 6")}
+                        >
+                          CLASS 6
+                        </Button>
+                      </td>
+                    </tr>
                   </tbody>
                 </Table>
               </div>
@@ -530,7 +201,6 @@ const Dashboard = () => {
 
             {showSubjectsTable && (
               <div className="screen2">
-                {/* <h2>Subjects</h2> */}
                 <Table bordered>
                   <thead className="thead-light">
                     <tr>
@@ -541,58 +211,20 @@ const Dashboard = () => {
                     Back
                   </Button>
                   <tbody>
-                    <tr>
-                      <td>
-                        <Button
-                          className="screen2-btn"
-                          onClick={() =>
-                            handleSubjectButtonClick("BALBHARTI (MAHARATHI)")
-                          }
-                        >
-                          BALBHARTI (MAHARATHI)
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <Button
-                          className="screen2-btn"
-                          onClick={() => handleSubjectButtonClick("Maths")}
-                        >
-                          MATHS
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <Button
-                          className="screen2-btn"
-                          onClick={() => handleSubjectButtonClick("History")}
-                        >
-                          HISTORY
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <Button
-                          className="screen2-btn"
-                          onClick={() => handleSubjectButtonClick("English")}
-                        >
-                          ENGLISH
-                        </Button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <Button
-                          className="screen2-btn"
-                          onClick={() => handleSubjectButtonClick("Khel Khelu")}
-                        >
-                          KHELU KARU SHIKU
-                        </Button>
-                      </td>
-                    </tr>
+                    {classSubjectsMap[selectedClass].map((subjectName) => (
+                      <tr key={subjectName}>
+                        <td>
+                          <Button
+                            className="screen2-btn"
+                            onClick={() =>
+                              handleSubjectButtonClick(subjectName)
+                            }
+                          >
+                            {subjectName}
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
               </div>
@@ -624,7 +256,7 @@ const Dashboard = () => {
                       <td>
                         <Button
                           className="screen3-btn"
-                          onClick={handleVideoButtonClick}
+                          // onClick={handleVideoButtonClick}
                         >
                           EXAMS
                         </Button>
@@ -634,7 +266,7 @@ const Dashboard = () => {
                       <td>
                         <Button
                           className="screen3-btn"
-                          onClick={handleVideoButtonClick}
+                          // onClick={handleVideoButtonClick}
                         >
                           PDF
                         </Button>
@@ -650,6 +282,7 @@ const Dashboard = () => {
                 selectedSubject={selectedSubject}
                 onCloseForm={handleCloseChapterForm}
                 onBackToVideos={handleBackToVideos}
+                isAdmin={isAdmin}
               />
             )}
           </Card>
