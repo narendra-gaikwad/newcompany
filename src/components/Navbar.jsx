@@ -2,7 +2,7 @@ import React from "react";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import "../components/navbar.css"; // Import your custom CSS file for styling
+import "../components/navbar.css";
 
 const Navbar = ({ userEmail }) => {
   const navigate = useNavigate();

@@ -91,7 +91,7 @@
     overflow: hidden;
 }
 
-.progress-bar-addc {
+/* .progress-bar-addc {
     margin-top: 0.5rem;
     background-color: #f0f0f0;
     height: 20px;
@@ -99,7 +99,7 @@
     border-radius: 10px;
   
     overflow: hidden;
-}
+} */
 
 .progress-addc {
     height: 100%;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../components/professorTable.css"; // Import your CSS file with the provided styles
+import "../components/professorTable.css"; 
 
 const CollapsibleMenu = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);

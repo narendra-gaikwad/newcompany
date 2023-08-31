@@ -9,6 +9,8 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #71f09b;
+    margin-left: 5px;
+        margin-right: 20px;
 }
 
 .container-login {
@@ -24,6 +26,7 @@ body {
 .form-group {
     margin-bottom: 20px;
 }
+
 
 .form-group label {
     display: block;
@@ -57,6 +60,7 @@ body {
 .login-buttons button:last-child {
     background-color: #007bff;
     margin-left: auto;
+    margin-right: 10px;
 }
 
 .form-group button:hover {
