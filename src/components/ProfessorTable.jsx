@@ -76,7 +76,7 @@ const ProfessorTable = () => {
                 <td>{professor.Mobile}</td>
                 <td>{professor.Email}</td>
                 <td>{professor["Joining Date"]}</td>
-                <td>{/* Add actions here, like edit or delete */}</td>
+              
               </tr>
             ))}
           </tbody>

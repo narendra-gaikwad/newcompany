@@ -1,11 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, firestore } from "../firebase";
 import "../components/dashboard.css";
 import ChapterForm from "./ChapterForm";
 import Navbar from "./Navbar";
 import LeftSideMenu from "./LeftSideMenu";
-import { Container, Button, Table, Card, CardHeader, Row } from "reactstrap";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import {
+  Container,
+  Button,
+  Table,
+  Card,
+  CardHeader,
+  Row,
+  Col,
+  FormGroup,
+  Input,
+} from "reactstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -173,12 +191,63 @@ const Dashboard = () => {
   const [showVideosTable, setShowVideosTable] = useState(false);
   const [showChapterForm, setShowChapterForm] = useState(false);
 
+  const [paymentData, setPaymentData] = useState([]);
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dataRef = collection(firestore, "usersData");
+        const q = query(dataRef, where("payment_status", "==", "Unverified"));
+
+        const querySnapshot = await getDocs(q);
+
+        const paymentDataArray = [];
+
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          paymentDataArray.push({
+            uid: doc.id, // Assuming the document ID serves as the UID
+            payment_status: data.payment_status,
+            signupData: data.signupData, // Adjust the structure as needed
+            transaction_Id: data.transaction_Id,
+          });
+        });
+
+        // Initialize the paymentData array with the fetched data
+        setPaymentData(
+          paymentDataArray.map((data) => ({
+            ...data,
+            workingStatus: data.payment_status,
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
     onAuthStateChanged(auth, (user) => {
       if (user) setUserData(user);
       else setUserData(null);
     });
   }, []);
+
+  const handleUpdatePaymentStatus = async (index) => {
+    try {
+      const updatedPaymentData = [...paymentData]; // Create a copy of the array
+      const userDocRef = doc(firestore, "usersData", paymentData[index].uid);
+      console.log("Document Reference:", userDocRef.path);
+      await updateDoc(userDocRef, {
+        payment_status: updatedPaymentData[index].workingStatus,
+      });
+      console.log("Payment status updated successfully");
+      window.alert("Payment status updated successfully");
+      // Update the state to reflect the change
+      setPaymentData(updatedPaymentData);
+    } catch (error) {
+      console.error("Error updating payment status:", error);
+    }
+  };
 
   const handleSelectClassClick = () => {
     setShowClassButtons(false);
@@ -236,6 +305,7 @@ const Dashboard = () => {
   }
 
   const isAdmin = userData.email === "admin@gmail.com";
+  const isLocal = userData.email === "local@gmail.com";
 
   return (
     <>
@@ -254,7 +324,7 @@ const Dashboard = () => {
                 </div>
               </Row>
             </CardHeader>
-            {showClassButtons && (
+            {!isLocal && showClassButtons && (
               <Button
                 className="select-class-btn"
                 onClick={handleSelectClassClick}
@@ -511,22 +581,12 @@ const Dashboard = () => {
                     </tr>
                     <tr>
                       <td>
-                        <Button
-                          className="screen3-btn"
-                          // onClick={handleVideoButtonClick}
-                        >
-                          EXAMS
-                        </Button>
+                        <Button className="screen3-btn">EXAMS</Button>
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <Button
-                          className="screen3-btn"
-                          // onClick={handleVideoButtonClick}
-                        >
-                          PDF
-                        </Button>
+                        <Button className="screen3-btn">PDF</Button>
                       </td>
                     </tr>
                   </tbody>
@@ -544,6 +604,120 @@ const Dashboard = () => {
             )}
           </Card>
         </Container>
+
+        {/* <div className="pl-lg-2">
+          {isLocal && (
+            <div className="pl-lg-4">
+              {paymentData.map((data, index) => (
+                <Row key={index} className="mb-4">
+                  <Col lg="9">
+                    <div className="mb-3">
+                      <strong>payment_status</strong> {data.payment_status}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Contact No:</strong> {data.signupData.contact_no}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Email:</strong> {data.signupData.email}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Address:</strong> {data.signupData.address}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Blood Group:</strong>{" "}
+                      {data.signupData.blood_group}
+                    </div>
+                  </Col>
+
+                  <Col lg="3">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor="input-last-name"
+                      >
+                        Working Status
+                      </label>
+                      <Input
+                        type="select"
+                        className="form-control"
+                        value={selectedWorkingStatus}
+                        onChange={(e) =>
+                          setSelectedWorkingStatus(e.target.value)
+                        }
+                      >
+                        <option value="Verified">Verified</option>
+                        <option value="Unverified">Unverified</option>
+                      </Input>
+                    </FormGroup>
+                    <Button onClick={handleUpdatePaymentStatus}>
+                      Update Payment Status for All
+                    </Button>
+                  </Col>
+                </Row>
+              ))}
+            </div>
+          )}
+        </div> */}
+        <div className="pl-lg-2">
+          {isLocal && (
+            <div className="pl-lg-4">
+              {paymentData.map((data, index) => (
+                <Row key={index} className="mb-4">
+                  <Col lg="9">
+                    <div className="mb-3">
+                      <strong>payment_status</strong> {data.payment_status}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Contact No:</strong> {data.signupData.contact_no}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Email:</strong> {data.signupData.email}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Address:</strong> {data.signupData.address}
+                    </div>
+                    <div className="mb-3">
+                      <strong>uid:</strong> {data.signupData.uid}
+                    </div>
+                    <div className="mb-3">
+                      <strong>Blood Group:</strong>{" "}
+                      {data.signupData.blood_group}
+                    </div>
+                  </Col>
+
+                  <Col lg="3">
+                    <FormGroup>
+                      <label
+                        className="form-control-label"
+                        htmlFor={`input-working-status-${index}`}
+                      >
+                        Working Status
+                      </label>
+                      <Input
+                        type="select"
+                        className="form-control"
+                        id={`input-working-status-${index}`}
+                        value={paymentData[index].workingStatus}
+                        onChange={(e) => {
+                          const updatedPaymentData = [...paymentData];
+                          updatedPaymentData[index].workingStatus =
+                            e.target.value;
+                          setPaymentData(updatedPaymentData);
+                        }}
+                      >
+                        <option value="Verified">Verified</option>
+                        <option value="Unverified">Unverified</option>
+                      </Input>
+                    </FormGroup>
+                    <Button onClick={() => handleUpdatePaymentStatus(index)}>
+                      Update Payment Status
+                    </Button>
+                  </Col>
+                </Row>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

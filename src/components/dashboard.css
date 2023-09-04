@@ -25,9 +25,9 @@
 }
 .select-class-btn {
     background-color: #3498db;
-    /* background-color: #eaec59; */
+   
     color: #fff;
-    /* color: #000; */
+  
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -35,7 +35,7 @@
 .select-class-btn:hover{
     background-color:#2ecc71;
     
-    /* color: #fff; */
+  
 }
 
 .class-buttons {
@@ -194,7 +194,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    /* background-color: #fbf1fc; */
+   
     background-color: #41badf;
     padding: 10px 20px;
     display: flex;

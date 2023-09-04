@@ -32,7 +32,6 @@ const Login = () => {
         password
       );
       const user = userCreatdential.user;
-      console.log(user);
       setIsLoading(false);
       navigate("/dashboard");
     } catch (error) {

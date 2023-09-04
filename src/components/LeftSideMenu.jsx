@@ -7,7 +7,7 @@ const LeftSideMenu = () => {
       <div className="menu-list">
         <div className="main-menuh">Main menu</div>
 
-        {/* <div className="menu-item">MAIN MENU</div> */}
+      
         <div className="menu-item">Dashboard</div>
         <div className="menu-item">Classes Lists</div>
         <div className="menu-item has-submenu">

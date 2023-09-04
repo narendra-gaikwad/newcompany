@@ -38,7 +38,6 @@ const Register = () => {
 
   // const handleFormChange = (step, field, value) => {
   //   dispatch(updateFormData({ step, field, value }));
-  //   console.log("Updated Form Data:", formData);
   // };
   const handleFormChange = (step, field, value) => {
     dispatch(updateFormData({ step: step, field: field, value: value }));
@@ -54,7 +53,6 @@ const Register = () => {
       formData.step3.password
     );
     const user = userCreadential.user;
-    console.log(user);
     navigate("/");
   };
 
@@ -334,7 +332,6 @@ const Register = () => {
             <button onClick={handleNext}>NEXT</button>
           ) : (
             <button onClick={handleSubmit}>SUBMIT</button>
-            // <button onClick={handleFormChange}>SUBMIT</button>
           )}
         </div>
       </div>

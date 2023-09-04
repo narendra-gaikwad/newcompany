@@ -5,12 +5,12 @@
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    /* background-color: #f9f9f9; */
+ 
     background-color: hsla(0, 0%, 98%, 0.719);
-    /* background-color: #f0a8a8; */
+  
     margin-bottom: 80px;
-            margin-top: 25px;
-            padding-top: 5px;
+     margin-top: 25px;
+     padding-top: 5px;
 }
 
 
@@ -36,15 +36,7 @@ select {
     box-sizing: border-box;
 }
 
-/* input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding-right: 4px;
 
-}  */
 .form-heading {
     text-align: center;
     margin-top: 40px;
@@ -159,7 +151,4 @@ select::after {
    
 }
 
-/* .login-link{
-    margin-bottom: 10px;
-} */
 
