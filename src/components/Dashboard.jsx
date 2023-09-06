@@ -4,8 +4,6 @@ import { auth, firestore } from "../firebase";
 import "../components/dashboard.css";
 import ChapterForm from "./ChapterForm";
 import MyNavbar from "./MyNavbar";
-// import Navbar from "./Navbar";
-// import LeftSideMenu from "./LeftSideMenu";
 
 import {
   collection,
@@ -215,18 +213,18 @@ const Dashboard = () => {
             transaction_Id: data.transaction_Id,
           });
         });
-        // const filteredData = paymentDataArray.filter(
-        //   (data) =>
-        //     data.signupData.email
-        //       .toLowerCase()
-        //       .includes(searchQuery.toLowerCase()) ||
-        //     data.transaction_Id
-        //       .toLowerCase()
-        //       .includes(searchQuery.toLowerCase()) ||
-        //     data.uid.toLowerCase().includes(searchQuery.toLowerCase())
-        // );
+        const filteredData = paymentDataArray.filter(
+          (data) =>
+            data.signupData.email
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            data.transaction_Id
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            data.uid.toLowerCase().includes(searchQuery.toLowerCase())
+        );
 
-        // setFilteredPaymentData(filteredData);
+        setFilteredPaymentData(filteredData);
 
         setPaymentData(
           paymentDataArray.map((data) => ({
@@ -249,22 +247,27 @@ const Dashboard = () => {
   const handleUpdatePaymentStatus = async (index) => {
     try {
       const updatedPaymentData = [...paymentData];
-      const userDocRef = doc(firestore, "usersData", paymentData[index].uid);
+      const userDocRef = doc(
+        firestore,
+        "usersData",
+        updatedPaymentData[index].uid
+      );
       console.log("Document Reference:", userDocRef.path);
 
       const currentTime = new Date().toLocaleString();
+
+      updatedPaymentData[index].workingStatus = "Verified";
 
       await updateDoc(userDocRef, {
         payment_status: updatedPaymentData[index].workingStatus,
         "signupData.timeStamp": currentTime,
       });
 
-      console.log("Payment status and timestamp updated successfully");
       window.alert("Payment status and timestamp updated successfully");
 
       setPaymentData(updatedPaymentData);
     } catch (error) {
-      console.error("Error updating payment status and timestamp:", error);
+      console.error("Error updating payment status:", error);
     }
   };
 
@@ -331,12 +334,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <MyNavbar userEmail={userData.email} />
-      {/* <Navbar userEmail={userData.email} /> */}
-      {/* <div>
-        <h2>Welcome: {userData.email}</h2>
-      </div> */}
-      {/* <LeftSideMenu /> */}
+      {/* <MyNavbar userEmail={userData.email} /> */}
+
       <div>
         <Container className="container container-dashboard">
           <Card className="dashboard-card">
@@ -360,7 +359,6 @@ const Dashboard = () => {
 
             {showClassesTable && (
               <div className="screen2">
-                {/* <h2>Classes</h2> */}
                 <Table bordered>
                   <thead className="thead-light">
                     <tr>
@@ -675,11 +673,11 @@ const Dashboard = () => {
                           const updatedPaymentData = [...filteredPaymentData];
                           updatedPaymentData[index].workingStatus =
                             e.target.value;
-                          setFilteredPaymentData(updatedPaymentData); // Update the filtered data
+                          setFilteredPaymentData(updatedPaymentData);
                         }}
                       >
-                        <option value="Verified">Verified</option>
                         <option value="Unverified">Unverified</option>
+                        <option value="Verified">Verified</option>
                       </Input>
                     </FormGroup>
                     <Button onClick={() => handleUpdatePaymentStatus(index)}>
