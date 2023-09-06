@@ -3,8 +3,10 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, firestore } from "../firebase";
 import "../components/dashboard.css";
 import ChapterForm from "./ChapterForm";
-import Navbar from "./Navbar";
-import LeftSideMenu from "./LeftSideMenu";
+import MyNavbar from "./MyNavbar";
+// import Navbar from "./Navbar";
+// import LeftSideMenu from "./LeftSideMenu";
+
 import {
   collection,
   query,
@@ -192,7 +194,8 @@ const Dashboard = () => {
   const [showChapterForm, setShowChapterForm] = useState(false);
 
   const [paymentData, setPaymentData] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPaymentData, setFilteredPaymentData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -206,14 +209,25 @@ const Dashboard = () => {
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           paymentDataArray.push({
-            uid: doc.id, // Assuming the document ID serves as the UID
+            uid: doc.id,
             payment_status: data.payment_status,
-            signupData: data.signupData, // Adjust the structure as needed
+            signupData: data.signupData,
             transaction_Id: data.transaction_Id,
           });
         });
+        // const filteredData = paymentDataArray.filter(
+        //   (data) =>
+        //     data.signupData.email
+        //       .toLowerCase()
+        //       .includes(searchQuery.toLowerCase()) ||
+        //     data.transaction_Id
+        //       .toLowerCase()
+        //       .includes(searchQuery.toLowerCase()) ||
+        //     data.uid.toLowerCase().includes(searchQuery.toLowerCase())
+        // );
 
-        // Initialize the paymentData array with the fetched data
+        // setFilteredPaymentData(filteredData);
+
         setPaymentData(
           paymentDataArray.map((data) => ({
             ...data,
@@ -230,22 +244,27 @@ const Dashboard = () => {
       if (user) setUserData(user);
       else setUserData(null);
     });
-  }, []);
+  }, [searchQuery, paymentData]);
 
   const handleUpdatePaymentStatus = async (index) => {
     try {
-      const updatedPaymentData = [...paymentData]; // Create a copy of the array
+      const updatedPaymentData = [...paymentData];
       const userDocRef = doc(firestore, "usersData", paymentData[index].uid);
       console.log("Document Reference:", userDocRef.path);
+
+      const currentTime = new Date().toLocaleString();
+
       await updateDoc(userDocRef, {
         payment_status: updatedPaymentData[index].workingStatus,
+        "signupData.timeStamp": currentTime,
       });
-      console.log("Payment status updated successfully");
-      window.alert("Payment status updated successfully");
-      // Update the state to reflect the change
+
+      console.log("Payment status and timestamp updated successfully");
+      window.alert("Payment status and timestamp updated successfully");
+
       setPaymentData(updatedPaymentData);
     } catch (error) {
-      console.error("Error updating payment status:", error);
+      console.error("Error updating payment status and timestamp:", error);
     }
   };
 
@@ -299,6 +318,9 @@ const Dashboard = () => {
   const handleCloseChapterForm = () => {
     setShowChapterForm(false);
   };
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   if (!userData) {
     return <div>Loading...</div>;
@@ -309,21 +331,24 @@ const Dashboard = () => {
 
   return (
     <>
+      <MyNavbar userEmail={userData.email} />
       {/* <Navbar userEmail={userData.email} /> */}
-      <div>
+      {/* <div>
         <h2>Welcome: {userData.email}</h2>
-      </div>
+      </div> */}
       {/* <LeftSideMenu /> */}
       <div>
         <Container className="container container-dashboard">
           <Card className="dashboard-card">
-            <CardHeader>
-              <Row className="align-items-center">
-                <div className="col">
-                  <h3 className="mb-0">Upload Class Wise Video</h3>
-                </div>
-              </Row>
-            </CardHeader>
+            {!isLocal && (
+              <CardHeader>
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h3 className="mb-0">Upload Class Wise Video</h3>
+                  </div>
+                </Row>
+              </CardHeader>
+            )}
             {!isLocal && showClassButtons && (
               <Button
                 className="select-class-btn"
@@ -605,83 +630,31 @@ const Dashboard = () => {
           </Card>
         </Container>
 
-        {/* <div className="pl-lg-2">
-          {isLocal && (
-            <div className="pl-lg-4">
-              {paymentData.map((data, index) => (
-                <Row key={index} className="mb-4">
-                  <Col lg="9">
-                    <div className="mb-3">
-                      <strong>payment_status</strong> {data.payment_status}
-                    </div>
-                    <div className="mb-3">
-                      <strong>Contact No:</strong> {data.signupData.contact_no}
-                    </div>
-                    <div className="mb-3">
-                      <strong>Email:</strong> {data.signupData.email}
-                    </div>
-                    <div className="mb-3">
-                      <strong>Address:</strong> {data.signupData.address}
-                    </div>
-                    <div className="mb-3">
-                      <strong>Blood Group:</strong>{" "}
-                      {data.signupData.blood_group}
-                    </div>
-                  </Col>
-
-                  <Col lg="3">
-                    <FormGroup>
-                      <label
-                        className="form-control-label"
-                        htmlFor="input-last-name"
-                      >
-                        Working Status
-                      </label>
-                      <Input
-                        type="select"
-                        className="form-control"
-                        value={selectedWorkingStatus}
-                        onChange={(e) =>
-                          setSelectedWorkingStatus(e.target.value)
-                        }
-                      >
-                        <option value="Verified">Verified</option>
-                        <option value="Unverified">Unverified</option>
-                      </Input>
-                    </FormGroup>
-                    <Button onClick={handleUpdatePaymentStatus}>
-                      Update Payment Status for All
-                    </Button>
-                  </Col>
-                </Row>
-              ))}
-            </div>
-          )}
-        </div> */}
         <div className="pl-lg-2">
           {isLocal && (
             <div className="pl-lg-4">
-              {paymentData.map((data, index) => (
+              <Input
+                type="text"
+                placeholder="Search Data"
+                value={searchQuery}
+                onChange={handleSearchInputChange}
+              />
+              {filteredPaymentData.map((data, index) => (
                 <Row key={index} className="mb-4">
                   <Col lg="9">
                     <div className="mb-3">
                       <strong>payment_status</strong> {data.payment_status}
                     </div>
-                    <div className="mb-3">
-                      <strong>Contact No:</strong> {data.signupData.contact_no}
-                    </div>
+
                     <div className="mb-3">
                       <strong>Email:</strong> {data.signupData.email}
                     </div>
+
                     <div className="mb-3">
-                      <strong>Address:</strong> {data.signupData.address}
+                      <strong>transaction_Id:</strong> {data.transaction_Id}
                     </div>
                     <div className="mb-3">
                       <strong>uid:</strong> {data.signupData.uid}
-                    </div>
-                    <div className="mb-3">
-                      <strong>Blood Group:</strong>{" "}
-                      {data.signupData.blood_group}
                     </div>
                   </Col>
 
@@ -697,12 +670,12 @@ const Dashboard = () => {
                         type="select"
                         className="form-control"
                         id={`input-working-status-${index}`}
-                        value={paymentData[index].workingStatus}
+                        value={data.workingStatus}
                         onChange={(e) => {
-                          const updatedPaymentData = [...paymentData];
+                          const updatedPaymentData = [...filteredPaymentData];
                           updatedPaymentData[index].workingStatus =
                             e.target.value;
-                          setPaymentData(updatedPaymentData);
+                          setFilteredPaymentData(updatedPaymentData); // Update the filtered data
                         }}
                       >
                         <option value="Verified">Verified</option>

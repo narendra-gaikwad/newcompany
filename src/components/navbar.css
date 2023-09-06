@@ -1,33 +1,48 @@
+/* navbar.css */
 
+/* Style for the Navbar */
 .navbar {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 190vh;
-    height: 100%;
-
-    background-color: #41badf;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    width: 100%;
+    z-index: 1000;
+    background-color: #fff;
+    /* Change the background color to your preference */
 }
 
-.logo {
+/* Style for the NavbarBrand (logo) */
+.navbar-brand {
     font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    /* Change the text color to your preference */
+}
+
+/* Style for the user info section */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* Push user info to the right */
+}
+
+.user-info span {
+    margin-right: 10px;
+    /* Add spacing between email and button */
+    font-weight: bold;
 }
 
 .user-info button {
-    background-color: #dd4f4f;
+    padding: 8px 12px;
+    background-color: #007bff;
+    /* Change button color to your preference */
     color: #fff;
+    /* Change button text color to your preference */
     border: none;
-    padding: 12px 10px;
-    border-radius: 4px;
     cursor: pointer;
-    margin-left: 14px;
-    margin-right: 35px;
 }
 
 .user-info button:hover {
-    background-color: #ff0000;
+    background-color: #0056b3;
+    /* Change button color on hover */
 }

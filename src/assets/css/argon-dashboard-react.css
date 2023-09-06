@@ -4918,6 +4918,7 @@ input[type="button"].btn-block {
   border-radius: 0.375rem;
   height: 200px;
     width: 400px;
+    margin-top: 2rem;
     
 }
 .card > hr {
