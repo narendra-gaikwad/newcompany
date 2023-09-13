@@ -4,6 +4,7 @@ import { auth, firestore } from "../firebase";
 import "../components/dashboard.css";
 import ChapterForm from "./ChapterForm";
 import MyNavbar from "./MyNavbar";
+import LeftSideMenu from "./LeftSideMenu";
 
 import {
   collection,
@@ -252,7 +253,6 @@ const Dashboard = () => {
         "usersData",
         updatedPaymentData[index].uid
       );
-      console.log("Document Reference:", userDocRef.path);
 
       const currentTime = new Date().toLocaleString();
 
@@ -334,7 +334,8 @@ const Dashboard = () => {
 
   return (
     <>
-      {/* <MyNavbar userEmail={userData.email} /> */}
+      <MyNavbar userEmail={userData.email} />
+      <LeftSideMenu />
 
       <div>
         <Container className="container container-dashboard">

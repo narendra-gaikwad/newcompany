@@ -45,6 +45,7 @@ const ChapterForm = ({
 
   const handleDeleteChapter = async (chapterId, videoURL) => {
     try {
+      console.log("Video URL to delete:", videoURL);
       const chapterRef = doc(classRef, chapterId);
       await deleteDoc(chapterRef);
 
@@ -139,7 +140,7 @@ const ChapterForm = ({
                               onClick={() =>
                                 handleDeleteChapter(
                                   chapter.id,
-                                  chapter.videoURL
+                                  chapter.chapterData.videoURL
                                 )
                               }
                             >
