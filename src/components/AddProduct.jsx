@@ -168,10 +168,10 @@ const AddProduct = (props) => {
                     </div>
 
                     <Button
-                      color="primary"
+                      color="secondary"
                       type="button"
                       onClick={handleFormSubmit}
-                      size="sm"
+                      // size="sm"
                     >
                       Submit
                     </Button>

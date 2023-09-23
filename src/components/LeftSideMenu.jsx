@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom"; 
 import "../components/leftSideMenu.css";
 
 const LeftSideMenu = () => {
@@ -33,6 +33,9 @@ const LeftSideMenu = () => {
         </div> */}
         <Link to="/add-product" className="menu-item">
           Add Procuct
+        </Link>
+        <Link to="/exampage" className="menu-item">
+          Exam
         </Link>
       </div>
     </div>

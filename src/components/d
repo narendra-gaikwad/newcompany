@@ -1,24 +1,62 @@
+exam(collection name ) H6WVwK3JuEQf1TrPSSAv(create one id)
+
+                                                                        examDate: "22/09/2023"
 
 
 
-
-productt        WoiDQeNaqdMqnFDmzSq0           productDetails(object)
-
-
-                                                    currentPrice
-                                                    "33333"
-                                                    (string)
+                                                                        examName  :"weekly exam 1"
 
 
-                                                    imageUrl
-                                                    "https://firebasestorage.googleapis.com/v0/b/star-easy-learning-a3211.appspot.com/o/images%2FiPad-Pro-12-9-(Apple).webp?alt=media&token=12c797eb-d067-4227-8608-a85d41ba3f2b"
-                                                    (string)
+
+                                                                        questionSet(map) -:
+                                                                                question1(map)
+                                                                                        answer:"A" (string)
+                                                                                        options(map)
+
+                                                                                                A
+                                                                                                "V S Khandekar"
+                                                                                                (string)
 
 
-                                                    productDetails
-                                                    "ipad product"
-                                                    (string)
+                                                                                                B
+                                                                                                "Sane Guruji"
+                                                                                                (string)
 
 
-                                                    productName
-                                                    "ipad"
+                                                                                                C
+                                                                                                "P L Deshpande"
+                                                                                                (string)
+
+
+                                                                                                D
+                                                                                                "G D Madgulkar"
+                                                                                                (string)
+
+                                                                                                question
+                                                                                                    "who is the authur of 'Shymachi Aai' book?" (string)
+                                                                                question2(map)
+                                                                                        answer:"D" (string)
+                                                                                        options(map)
+
+
+                                                                                                A
+                                                                                                "Mr. abc"
+                                                                                                (string)
+
+                                                                                                B
+                                                                                                "Mr. jkl"
+                                                                                                (string)
+
+                                                                                                C
+                                                                                                "Mrs. abs"
+                                                                                                (string)
+
+                                                                                                D
+                                                                                                "Miss. abs"
+                                                                                                (string)
+
+
+                                                                                                question
+                                                                                                    ""Wo isyour team leader"?" (string)
+
+                                                                        totalMarks:"30"(string)

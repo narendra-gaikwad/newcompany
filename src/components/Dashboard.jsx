@@ -335,7 +335,7 @@ const Dashboard = () => {
   return (
     <>
       <MyNavbar userEmail={userData.email} />
-      <LeftSideMenu />
+      {/* <LeftSideMenu /> */}
 
       <div>
         <Container className="container container-dashboard">

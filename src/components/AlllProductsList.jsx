@@ -1,19 +1,19 @@
-
-
 import React, { useEffect, useState } from "react";
 import { Table, Input, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { firestore } from "../firebase"; // Import your Firestore configuration
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { firestore, storage } from "../firebase";
+import "../components/allproductlist.css";
 
 const AllProductsList = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([]); // State variable to store product data
-  const [filteredProducts, setFilteredProducts] = useState([]); // State variable to store filtered product data
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const navigate = useNavigate();
 
-  // Fetch product data from Firestore when the component mounts
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -24,7 +24,7 @@ const AllProductsList = () => {
         });
         console.log("fetch data", productData);
         setProducts(productData);
-        setFilteredProducts(productData); // Initialize filtered products with all products
+        setFilteredProducts(productData);
       } catch (error) {
         console.error("Error fetching product data:", error);
       }
@@ -37,16 +37,30 @@ const AllProductsList = () => {
     const searchText = e.target.value;
     setSearchTerm(searchText);
 
-    // Filter products based on the search term
-    const filteredData = products.filter((item) =>
-      item.productData.productName
-        .toLowerCase()
-        .includes(searchText.toLowerCase())
+    const filteredData = products.filter(
+      (item) =>
+        item.productData.productName
+          .toLowerCase()
+          .includes(searchText.toLowerCase()) ||
+        item.productData.currentPrice
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
     );
     setFilteredProducts(filteredData);
   };
   const NavigateToAddProduct = () => {
     navigate("/add-product");
+  };
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await deleteDoc(doc(firestore, "productt", productId));
+      window.alert("Data is Deleted Successfully...");
+      setFilteredProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== productId)
+      );
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
   };
 
   return (
@@ -65,7 +79,7 @@ const AllProductsList = () => {
         <div className="button-container">
           <Button
             color="primary"
-            className="float-right"
+            // className="float-right"
             onClick={NavigateToAddProduct}
             style={{
               marginTop: "15px",
@@ -76,7 +90,7 @@ const AllProductsList = () => {
           </Button>
 
           <Button
-            color="primary"
+            // color="primary"
             className="float-right"
             style={{
               marginRight: "30px",
@@ -97,6 +111,7 @@ const AllProductsList = () => {
               <th>Current Price</th>
               <th>Product Details</th>
               <th>Image</th>
+              <th>Delete</th>
             </tr>
           </thead>
 
@@ -113,6 +128,13 @@ const AllProductsList = () => {
                     alt="Product"
                     width="50"
                     height="50"
+                  />
+                </td>
+                <td>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="delete-icon"
+                    onClick={() => handleDeleteProduct(item.id)}
                   />
                 </td>
               </tr>
